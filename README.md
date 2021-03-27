@@ -12,9 +12,36 @@ This will enable us in passing any message almost immediately without any delay 
 # How does this project work?
 HC 05/06 works on serial communication. The Android app is designed to send serial data to the Arduino Bluetooth module when a text is sent from the app. The Arduino Bluetooth module at the other end receives the data and sends it to the Arduino through the TX pin of the Bluetooth module (connected to RX pin of Arduino). The code uploaded to the Arduino checks the received data and compares it. Then it displays the message after encoding in an LCD displayable format.
 
-# Circuit Diagram
+# Connections
 
-![image](https://user-images.githubusercontent.com/39031660/112717792-d32d2080-8f14-11eb-947f-fc2793e6b632.png)
+LCD display with Arduino
+
+|S.No| LCD | ARDUINO |
+|-| --- | --- |
+|1| VSS (Pin-1) | GND |
+|2| VDD (Pin-2) | 5V |
+|3| RS  (Pin-4) | D4 |
+|4| RW  (Pin-5) | GND |
+|5| E   (Pin-6) | D5 |
+|6| D4  (Pin-11) | D6 |
+|7| D5  (Pin-12) | D7 |
+|8| D6  (Pin-13) | D8 |
+|9| D7  (Pin-14) | D9 |
+|10| A   (Pin-15) | 5V |
+|11| K   (Pin-16) | GND |
+
+
+Connect the 1K Ohm Resistor between the VSS Pin (pin-1) and the V0 Pin (pin-3).
+
+
+ Bluetoth Module with Arduino
+
+|S.NO| HC-05 Module | ARDUINO |
+|-| --- | --- |
+|1| RXD | TXD (D1) |
+|2| TXD | RXD (D0) |
+|3| GND  | GND |
+|4| VCC  | 5V |
 
 
 # Code
