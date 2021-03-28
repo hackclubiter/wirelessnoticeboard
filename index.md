@@ -1,37 +1,104 @@
-## Welcome to GitHub Pages
+# Wireless Notice Board
+This will enable us in passing any message almost immediately without any delay just by sending a command from our smart phone.
 
-You can use the [editor on GitHub](https://github.com/SOACodeRoom/wirelessnoticeboard/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+# Components Required
+1. Arduino Uno R3
+2. 16x2 LCD Display
+3. HC-05 Bluetooth Module
+4. Resistor of 1k Ohm
+5. Jumper Wires
+6. Bread board
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+# How does this project work?
+HC 05/06 works on serial communication. The Android app is designed to send serial data to the Arduino Bluetooth module when a text is sent from the app. The Arduino Bluetooth module at the other end receives the data and sends it to the Arduino through the TX pin of the Bluetooth module (connected to RX pin of Arduino). The code uploaded to the Arduino checks the received data and compares it. Then it displays the message after encoding in an LCD displayable format.
 
-### Markdown
+# Connections
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+LCD display with Arduino
 
-```markdown
-Syntax highlighted code block
+|S.No| LCD | ARDUINO |
+|-| --- | --- |
+|1| VSS (Pin-1) | GND |
+|2| VDD (Pin-2) | 5V |
+|3| RS  (Pin-4) | D4 |
+|4| RW  (Pin-5) | GND |
+|5| E   (Pin-6) | D5 |
+|6| D4  (Pin-11) | D6 |
+|7| D5  (Pin-12) | D7 |
+|8| D6  (Pin-13) | D8 |
+|9| D7  (Pin-14) | D9 |
+|10| A   (Pin-15) | 5V |
+|11| K   (Pin-16) | GND |
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
+Connect the 1K Ohm Resistor between the VSS Pin (pin-1) and the V0 Pin (pin-3).
 
-1. Numbered
-2. List
 
-**Bold** and _Italic_ and `Code` text
+ Bluetoth Module with Arduino
 
-[Link](url) and ![Image](src)
+|S.NO| HC-05 Module | ARDUINO |
+|-| --- | --- |
+|1| RXD | TXD (D1) |
+|2| TXD | RXD (D0) |
+|3| GND  | GND |
+|4| VCC  | 5V |
+
+
+# Code
+```cpp
+#include <LiquidCrystal.h>
+#include <SoftwareSerial.h>
+
+LiquidCrystal lcd (4, 5, 6, 7, 8, 9);
+SoftwareSerial mySerial (0, 1);   //(RX, TX);
+
+String value = "No Data Avaliable !!";
+String oldvalue;
+String newvalue = "No Data Avaliable !!";
+int i = 0;
+
+void setup() 
+{
+  lcd.begin(16,2);
+  mySerial.begin(9600);
+  Serial.begin(9600);
+  lcd.setCursor(0, 0);
+  lcd.print("Wireless Notice");
+  lcd.setCursor(0, 1);
+  lcd.print("     Board     ");
+  delay(3000);
+  lcd.clear();
+  lcd.print("  (: Welcome :)  ");
+}
+
+void loop() 
+{
+  value = mySerial.readString();
+  value.trim();
+  Serial.println(value);
+  if(value != oldvalue)
+  {
+    newvalue = value;
+  }
+  lcd.clear();
+  lcd.setCursor(i, 0);
+  lcd.print(newvalue);
+  i++;
+  if(i >= 15)
+  {
+    i = 0;
+  }
+  value = oldvalue;
+}
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+# Android App Link
+We have found this great app which works best on this project.
 
-### Jekyll Themes
+[Click here to download](https://bit.ly/39jTsa0)
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/SOACodeRoom/wirelessnoticeboard/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Thanks to the developer for making this great app which is very easy for beginner.
 
-### Support or Contact
+---
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Made with 🖤 by [Sanket Sanjeeb Pattanaik](https://github.com/sanketsanjeebpattanaik)
