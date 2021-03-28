@@ -1,6 +1,9 @@
 # Wireless Notice Board
 This will enable us in passing any message almost immediately without any delay just by sending a command from our smart phone.
 
+<img src="https://user-images.githubusercontent.com/39031660/112743533-c6acd480-8fb5-11eb-986c-c9da6a5f89cb.jpeg" width=640>
+
+
 # Components Required
 1. Arduino Uno R3
 2. 16x2 LCD Display
