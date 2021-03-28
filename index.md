@@ -101,4 +101,9 @@ Thanks to the developer for making this great app which is very easy for beginne
 
 ---
 
+# Download
+Download the project files, code and documentation by clicking [here](https://github.com/SOACodeRoom/wirelessnoticeboard/archive/refs/tags/v1.0.zip)
+
+---
+
 Made with 🖤 by [Sanket Sanjeeb Pattanaik](https://github.com/sanketsanjeebpattanaik)
